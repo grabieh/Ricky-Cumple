@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ricky-Cumple</title>
+    <script type="module" src="contadoranimado.js" defer></script>
+</head>
+<body>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+
+        body {
+            min-height: 100vh;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            background-image: url('background-white.webp');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+        }
+        
+        #time {
+            display: flex;
+            gap: 30px;
+        }
+        #time .circle {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #time .circle svg {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            transform: rotate(270deg);
+        }
+        #time .circle svg circle {
+            width: 100%;
+            height: 100%;
+            fill: transparent;
+            stroke-width: 8;
+            stroke: #282828;
+            stroke-linecap: round;
+            transform: translate(5px,5px);
+        }
+        #time .circle svg circle:nth-child(2) {
+            stroke: var(--clr);
+            stroke-dasharray: 440;
+            stroke-dashoffset: 440;
+        }
+        #time div {
+            position: absolute;
+            text-align: center;
+            font-weight: 500;
+            color: #ffffff;
+            font-size: 1.5em;
+            
+        }
+        #time div span {
+         position: absolute;
+         transform: translateX(-50px) translateY(-7px);
+         font-size: 0.35em;
+         font-weight: 300;
+         letter-spacing: 0.1em;
+         text-transform: uppercase;
+         width: 100px;
+         
+        }
+        #time .dots {
+         position: absolute;
+         width: 100%;
+         height: 100%;
+         border-radius: 50%;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         z-index: 1000;
+        }
+        #time .dots::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            width: 15px;
+            height: 15px;
+            background: var(--clr);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--clr), 0 0 60px var(--clr);
+
+        }
+        h1 {
+            font-family: "Shadows Into Light", cursive;
+            font-weight: bolder;
+            font-style: oblique;
+            background: linear-gradient(red 10%,#e8ec03 , red 70%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 3rem;
+            line-height: 1;
+            text-align: center;
+            padding-bottom: 20px;
+        }
+        .contador {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+        }
+        .centro {
+            height: 100vh;
+            width: 100%;
+            position: absolute;
+            background-image: url('noise.webp');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .bandera {
+            position: absolute;
+            transform: translateX(-400%) translateY(10px);
+            mask-image: url('maskflag.webp');
+            mask-position: 50%;
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            mask-mode: alpha;
+            margin-left: 10px;
+        }
+        .ricky {
+            position: absolute;
+            transform: translateX(180%) translateY(-40px);
+            filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.363));
+            mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+            margin-right: 10px;
+        }
+        iframe {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 10000;
+        }
+        #message {
+            display: none;
+            position: absolute;
+            font-family: "Shadows Into Light", cursive;
+            font-weight: bolder;
+            font-style: oblique;
+            background: linear-gradient(red 10%,#e8ec03 , red 70%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 3rem;
+            line-height: 1;
+            text-align: center;
+        } 
+
+        @media screen and (max-width: 1024px) {
+            .ricky {
+                display: none;
+            }
+            .bandera {
+                display: none;
+            }
+        }
+        @media screen and (max-width: 750px) {
+            .contador {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+            h1 {
+                padding-bottom: 0;
+            }
+            .legendario {
+                display: none;
+            }
+        }
+        
+    </style>
+    <div class="centro"></div>
+    <img src="es.webp" alt="Spain" class="bandera">
+    <img src="ricky-removebg-preview.png" alt="Ricky-Supreme" class="ricky">
+    <div class="container">
+        <h1 id="h1"><span class="legendario">EL LEGENDARIO</span> RICKY CUMPLE EN...</h1>
+        
+        <div id="time" class="contador">
+            <div class="circle" style="--clr: #fff">
+                <div class="dots day_dot"></div>
+                <svg>
+                    <circle cx="70" cy="70" r="70"></circle>
+                    <circle cx="70" cy="70" r="70" id="dd"></circle>
+                </svg>
+                <div id="days">00</div>
+            </div>
+            <div class="circle" style="--clr:#f20202">
+                <div class="dots hr_dot"></div>
+                <svg>
+                    <circle cx="70" cy="70" r="70"></circle>
+                    <circle cx="70" cy="70" r="70" id="hh"></circle>
+                </svg>
+                <div id="hours">00</div>
+            </div>
+            <div class="circle" style="--clr:#b702f2">
+                <div class="dots min_dot"></div>
+                <svg>
+                    <circle cx="70" cy="70" r="70"></circle>
+                    <circle cx="70" cy="70" r="70" id="mm"></circle>
+                </svg>
+                <div id="minutes">00</div>
+            </div>
+            <div class="circle" style="--clr: #baf202">
+                <div class="dots sec_dot"></div>
+                <svg>
+                    <circle cx="70" cy="70" r="70"></circle>
+                    <circle cx="70" cy="70" r="70" id="ss"></circle>
+                </svg>
+                <div id="seconds">00</div>
+            </div>
+        </div>
+    </div>
+    <iframe id="video"src="https://www.youtube.com/embed/HvYgke2fBeg?autoplay=1" title="YouTube video player" frameborder="0"  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen onended="window.parent.postMessage('Ended', '*')""></iframe>
+    <span id="message">RICKY YA TIENE 21 AÑAZOS, FELICÍTALE ANDA</span>
+</body>
+</html>
