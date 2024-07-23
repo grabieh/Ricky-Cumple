@@ -15,7 +15,7 @@ const hr_dot = document.querySelector('.hr_dot')
 const min_dot = document.querySelector('.min_dot')
 const sec_dot = document.querySelector('.sec_dot')
 
-const bday = '07/17/2024'
+const bday = '07/17/2025'
 
 const x = setInterval(function() {
     const date = new Date(bday).getTime()
@@ -57,7 +57,7 @@ const x = setInterval(function() {
         setTimeout(() => {
             video.style.display = 'none'
             const fireworks = setInterval(function() {
-                const dateEnd = new Date(`07/18/2024`)
+                const dateEnd = new Date(`07/18/2025`)
                 const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 10000 }
                 if( dateEnd === Date.now()) {
                     clearInterval(fireworks)
